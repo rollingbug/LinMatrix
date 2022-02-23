@@ -34,7 +34,7 @@
 - Using the lm_lu_rank function to check the rank of given LU matrix is unreliable.
 - Using determinant (lm_lu_det) to check if a matrix is invertible (non-singular) is unreliable.
 - There are only a few null pointer and input value checks in this library, please do not input invalid memory addresses to APIs.
-- The matrix handle and its corresponding matrix data is not thread-safe, please do not access the same matrix handle/data from different threads/processes at the same time.
+- The matrix handle and its corresponding matrix data is not thread-safe, please do not access the same matrix handle/data from different threads at the same time.
 
 
 # Build everything
