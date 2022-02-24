@@ -290,11 +290,16 @@ int32_t main()
      *     | xn^2  yn^2  zn^2  xn*yn  xn*zn  yn*zn  xn  yn  zn  1 |
      *     -                                                      -
      *
-     * The matrix X requires 10 by n + 1 (e.g. 10 * 85) elements memory
-     * space, it is not necessary to generate X first before computing
-     * X' * X, an alternative way is to compute the [0,:]' * X[0,:], ... ,
-     * X[n,:]' * X[n,:] sequentially and accumulate the result of each
-     * multiplication.
+     * Looking the equation above, the matrix X will occupy 10 by n + 1 
+     * (e.g. 10 * 85) elements memory space if we expand the equation directly.
+     * 
+     * It is not necessary to expand and generate X completely first before 
+     * computing X' * X. 
+     *
+     * An alternative way is to compute the X[0,:]' * X[0,:], ... , 
+     * X[n,:]' * X[n,:] sequentially and accumulate the result of 
+     * each multiplication, so that we only need an 1 by n + 1 elements 
+     * memory space to store X[n,:] during the computation iteration.
      *
      * X[0] = [ x0^2, y0^2, z0^2, x0*y0, x0*z0, y0*z0, x0, y0, z0, 1]
      * X[1] = [ x1^2, y1^2, z1^2, x1*y1, x1*z1, y1*z1, x1, y1, z1, 1]
@@ -305,6 +310,7 @@ int32_t main()
      *
      * A = X' * X = X[0]' * X[0] + X[1]' * X[1] + ... + X[n]' * X[n]
      *
+     * where A is a 10 by 10 matrix.
      */
     for (r_idx = 0; r_idx < LM_SAMPLES_NUM; r_idx++) {
 
